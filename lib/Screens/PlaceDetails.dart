@@ -16,6 +16,7 @@ class PlaceDetails extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple.shade300,
         title: Center(
           child: Text(
             "Détails",
@@ -153,6 +154,9 @@ class PlaceDetails extends StatelessWidget {
                     ),
                     SizedBox(width: 30.0,),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple.shade300
+                      ),
 
                       onPressed: () {
     Navigator.pushReplacement(
@@ -164,7 +168,7 @@ class PlaceDetails extends StatelessWidget {
     },
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.deepPurple,
+                            // color: Colors.deepPurple,
                             borderRadius: BorderRadius.circular(10)
                         ),
                         child: Text(

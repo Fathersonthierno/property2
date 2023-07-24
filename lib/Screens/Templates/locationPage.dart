@@ -20,7 +20,8 @@ class _LocationPageState extends State<LocationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Page de location'),
+        title: Center(child: Text('Page de location')),
+        backgroundColor: Colors.deepPurple.shade300,
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -29,7 +30,7 @@ class _LocationPageState extends State<LocationPage> {
           children: <Widget>[
             // Formulaire de demande de location
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Durée de location souhaitée',
+                    decoration: InputDecoration(hintText: 'Durée de location souhaitée',
               enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(80),
           borderSide:
@@ -44,27 +45,27 @@ class _LocationPageState extends State<LocationPage> {
         fillColor: darkGrey,
         contentPadding:
         EdgeInsets.symmetric(horizontal: 17, vertical: 12),
-                      icon: Icon(Icons.calendar_today)
+                      icon: Icon(Icons.text_fields)
                     ),
                     controller: dureeLocationController,
-                    onTap: () async {
-                      DateTime? duration = await showDatePicker(context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2101)
-                      );
-                      if (duration != null){
-                        String formateddate = DateFormat("yyyy-mm-dd").format(duration);
-                        setState(() {
-                          dureeLocationController.text = formateddate.toString();
-
-                        });
-                      }else
-                        print("pas selectionné");
-                    },
+                    // onTap: () async {
+                    //   DateTime? duration = await showDatePicker(context: context,
+                    //       initialDate: DateTime.now(),
+                    //       firstDate: DateTime(2000),
+                    //       lastDate: DateTime(2101)
+                    //   );
+                    //   if (duration != null){
+                    //
+                    //     setState(() {
+                    //       dureeLocationController.text = DateFormat("yyyy-MM-dd").format(duration);
+                    //
+                    //     });
+                    //   }else
+                    //     print("pas selectionné");
+                    // },
                   ),SizedBox(height: 16.0,),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Date de début',
+                    decoration: InputDecoration(hintText: 'Date de début',
               enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(80),
           borderSide:
@@ -79,6 +80,7 @@ class _LocationPageState extends State<LocationPage> {
         fillColor: darkGrey,
         contentPadding:
         EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                 icon: Icon(Icons.calendar_today)
                     ),
                     validator: (value) {
                       if (value!.isEmpty) {
@@ -90,20 +92,19 @@ class _LocationPageState extends State<LocationPage> {
                     onTap: () async {
                       DateTime? duration = await showDatePicker(context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2000)
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101)
                       );
                       if (duration != null){
-                        String formateddate = DateFormat("yyyy-mm-dd").format(duration);
                         setState(() {
-                          dateDebutController.text = formateddate.toString();
+                          dateDebutController.text = DateFormat("yyyy-MM-dd").format(duration);
 
                         });
                       }
                     },
                   ), SizedBox(height: 16.0,),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'date de début',
+                    decoration: InputDecoration(hintText: 'date de début',
               enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(80),
           borderSide:
@@ -118,7 +119,8 @@ class _LocationPageState extends State<LocationPage> {
         fillColor: darkGrey,
         contentPadding:
         EdgeInsets.symmetric(horizontal: 17, vertical: 12),
-                    ),
+
+                        icon: Icon(Icons.calendar_today)   ),
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Veuillez entrer la date de fin';
@@ -129,36 +131,66 @@ class _LocationPageState extends State<LocationPage> {
                     onTap: () async {
                       DateTime? duration = await showDatePicker(context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2000)
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101)
+
+
                       );
                       if (duration != null){
-                        String formateddate = DateFormat("yyyy-mm-dd").format(duration);
                         setState(() {
-                          dateFinController.text = formateddate.toString();
+                          dateFinController.text = DateFormat("yyyy-MM-dd").format(duration);
 
                         });
                       }
                     },
                   ),
                   SizedBox(height: 16.0),
-                  ElevatedButton(
-                    onPressed: () {
+            ElevatedButton(
 
-                    },
-                    child: Text('Envoyer la demande'),
-                  ),
-                  SizedBox(height: 16.0),
-                  // Affichage du message de confirmation après soumission du formulaire
-                  if (_formSubmitted)
-                    Text(
-                      'Merci d\'avoir soumis votre demande de location. Notre équipe vous contactera sous peu pour planifier une visite du bien. Nous vous invitons également à passer à notre agence pour discuter des détails de la location et finaliser le contrat.',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                ],
+              onPressed: () {
+
+                  // Afficher la boîte de dialogue de confirmation
+                  _showConfirmationDialog();
+                },
+
+              child: Text('Envoyer la demande'
+              , style: TextStyle(
+                  fontSize: 18.0
+                ),),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple.shade300
+              ),
+            ),
+
+
+          ],
               ),
             ),
     );
   }
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Confirmation de demande'),
+        content: Text('Merci d\'avoir soumis votre demande de location. Notre équipe vous contactera sous peu pour planifier une visite du bien. Nous vous invitons également à passer à notre agence pour discuter des détails de la location et finaliser le contrat.'),
+        actions: [
+          ElevatedButton(
+style: ElevatedButton.styleFrom(
+  backgroundColor: Colors.deepPurple.shade300
+),
+            onPressed: () {
+              Navigator.pop(context); // Ferme la boîte de dialogue
+            },
+            child: Text('OK'
+            ,style: TextStyle(
+                color: Colors.white,
+              ),),
+          ),
+        ],
+      ),
+    );
+  }
+
 }
 
