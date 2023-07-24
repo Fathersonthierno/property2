@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_flutter/icons_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:property2/Models/Datamodel/PlaceModel.dart';
 import 'package:property2/Models/constants.dart';
 import 'package:property2/Screens/Templates/hiddendrawer.dart';
+import 'package:property2/Screens/Templates/locationPage.dart';
 
 class PlaceDetails extends StatelessWidget {
   final PlaceModel placeModel;
@@ -152,7 +154,14 @@ class PlaceDetails extends StatelessWidget {
                     SizedBox(width: 30.0,),
                     ElevatedButton(
 
-                      onPressed: () {},
+                      onPressed: () {
+    Navigator.pushReplacement(
+    context,
+    PageTransition(
+    type: PageTransitionType.fade,
+    child: LocationPage()));
+
+    },
                       child: Container(
                         decoration: BoxDecoration(
                             color: Colors.deepPurple,
