@@ -26,6 +26,7 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
   TextEditingController garageController = TextEditingController();
   TextEditingController typeDocumentController = TextEditingController();
   TextEditingController typeMaisonController = TextEditingController();
+  TextEditingController miseEnVenteOuLocationController = TextEditingController();
 
   // TextEditingController imagesController = TextEditingController();
   // TextEditingController ownerIdController = TextEditingController();
@@ -108,10 +109,30 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
               ),SizedBox(height: 10.0,),
-              TextFormField(
-                controller: typeMaisonController,
+              // TextFormField(
+              //   controller: typeMaisonController,
+              //   decoration: InputDecoration(
+              //     hintText: "Type de maison",
+              //     enabledBorder: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(80),
+              //       borderSide:
+              //       const BorderSide(color: Colors.transparent, width: 0.0),
+              //     ),
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(80),
+              //       borderSide:
+              //       const BorderSide(color: Colors.transparent, width: 0.0),
+              //     ),
+              //     filled: true,
+              //     fillColor: darkGrey,
+              //     contentPadding:
+              //     EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+              //   ),
+              // ),
+        TextFormField(
+                controller: miseEnVenteOuLocationController,
                 decoration: InputDecoration(
-                  hintText: "Type de maison",
+                  hintText: "Mettre en vente ou en location",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
@@ -307,12 +328,13 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
     Property property = Property();
     property.adresse= adresseController.text;
     property.description= descriptionController.text;
-    property.type= typeMaisonController.text;
+    // property.type= typeMaisonController.text;
     
     Maison maison = Maison();
     maison.cour=cour;
     maison.garage=garage;
     maison.capaciteGarage= int.parse(capaciteGarageController.text);
+    maison.miseEnVenteOuLocation= miseEnVenteOuLocationController.text;
     maison.typeDocment= typeDocumentController.text;
     maison.dimension= dimensionController.text;
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PlaceModel {
-  String title;
+  String title;String statut;
   int rent;
   String imagePath;
   List<String> photoCollections = [
@@ -15,7 +15,7 @@ class PlaceModel {
     "assets/images/image8.jpg",
     "assets/images/image9.jpg",
   ];
-  PlaceModel({ required this.title,  required this.rent, required this.imagePath,
+  PlaceModel({ required this.title,required this.statut ,  required this.rent, required this.imagePath,
   });
 }
 
@@ -23,11 +23,13 @@ List<PlaceModel> placeCollection = [
   PlaceModel(
     title: "Havre de paix",
     // details: "4 College Court Holyoke, MA 01040",
+    statut: "Acheter ce bien",
     rent: 300000,
     imagePath: "assets/images/image1.jpg",
   ),
   PlaceModel(
     title: "le beau appart",
+    statut: "Louer ce bien",
     // details: "221 Filmore St, Princetone, IA",
     rent: 400000,
     imagePath: "assets/images/image4.jpg",
@@ -35,11 +37,13 @@ List<PlaceModel> placeCollection = [
   PlaceModel(
     title: "La Vie est Belle",
     // details: "4 College Court Holyoke, MA 01040",
+    statut: "Louer ce bien",
     rent: 500000,
     imagePath: "assets/images/image5.jpg",
   ),
   PlaceModel(
     title: "La Belle villa",
+    statut: "Acheter ce bien",
     // details: "4 College Court Holyoke, MA 01040",
     rent: 600000,
     imagePath: "assets/images/image7.jpg",

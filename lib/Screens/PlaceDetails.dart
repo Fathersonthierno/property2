@@ -172,7 +172,7 @@ class PlaceDetails extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)
                         ),
                         child: Text(
-                            "Louer ce bien ",
+                            placeModel.statut,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15

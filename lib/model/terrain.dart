@@ -7,6 +7,7 @@ class Terrain {
   String? typeterrain;
   String? dimension;
   String? typedocument;
+  String? miseEnVenteOuLocation ;
 
   Terrain({
     this.id,
@@ -14,6 +15,7 @@ class Terrain {
     this.typeterrain,
     this.dimension,
     this.typedocument,
+    this.miseEnVenteOuLocation
   });
 
   factory Terrain.fromJson(Map<String, dynamic> json) => Terrain(
@@ -22,6 +24,7 @@ class Terrain {
     typeterrain: json["typeterrain"],
     dimension: json["dimension"],
     typedocument: json["typedocument"],
+    miseEnVenteOuLocation: json["miseEnVenteOuLocation"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -30,5 +33,6 @@ class Terrain {
     "typeterrain": typeterrain,
     "dimension": dimension,
     "typedocument": typedocument,
+    "miseEnVenteOuLocation": miseEnVenteOuLocation,
   };
 }

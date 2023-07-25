@@ -15,6 +15,7 @@ class Appart {
   bool? eauSeparee;
   bool? electricite;
   bool? electriciteSeparee;
+  String? miseEnVenteOuLocation ;
   String? extra ;
 
   Appart({
@@ -32,6 +33,7 @@ class Appart {
     this.eauSeparee,
     this.electriciteSeparee,
     this.extra,
+    this.miseEnVenteOuLocation,
   });
 
   factory Appart.fromJson(Map<String, dynamic> json) => Appart(
@@ -49,6 +51,7 @@ class Appart {
     electricite: json["electricite"],
     electriciteSeparee: json["electriciteSeparee"],
     extra: json["extra"],
+    miseEnVenteOuLocation: json["miseEnVenteOuLocation"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -66,5 +69,6 @@ class Appart {
     "electricite": electricite,
     "electriciteSeparee": electriciteSeparee,
     "extra": extra,
+    "miseEnVenteOuLocation": miseEnVenteOuLocation,
   };
 }

@@ -22,6 +22,7 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
   TextEditingController typeDocumentController = TextEditingController();
   // TextEditingController imagesController = TextEditingController();
   TextEditingController ownerIdController = TextEditingController();
+  TextEditingController miseEnVenteOuLocationController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -100,10 +101,28 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
                   EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
               ),SizedBox(height: 10.0,),
+              // TextFormField(
+              //   controller: typeTerrainController,
+              //   decoration: InputDecoration(
+              //     hintText: "Type terrain",
+              //     enabledBorder: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(80),
+              //       borderSide:
+              //       const BorderSide(color: Colors.transparent, width: 0.0),
+              //     ),
+              //     border: OutlineInputBorder(
+              //       borderRadius: BorderRadius.circular(80),
+              //       borderSide:
+              //       const BorderSide(color: Colors.transparent, width: 0.0),
+              //     ),
+              //     filled: true,
+              //     fillColor: darkGrey,
+              //     contentPadding:
+              //     EdgeInsets.symmetric(horizontal: 17, vertical: 12),),),
               TextFormField(
-                controller: typeTerrainController,
+                controller: miseEnVenteOuLocationController,
                 decoration: InputDecoration(
-                  hintText: "Type terrain",
+                  hintText: "Mettre en vente ou en location",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
@@ -255,13 +274,15 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
    Property property =  Property();
    property.adresse=adresseController.text;
    property.description=descriptionController.text;
-   property.type=typeTerrainController.text;
+   // property.type=typeTerrainController.text;
 
    Terrain terrain = Terrain();
    terrain.dimension = dimensionController.text;
+   terrain.miseEnVenteOuLocation = miseEnVenteOuLocationController.text;
    terrain.typedocument = typeDocumentController.text;
 
    property.terrain = terrain;
+   terrain.property=property;
     final response = await ApiProvider.addPropertyToOwner(jsonEncode(property));
     print(response);
 

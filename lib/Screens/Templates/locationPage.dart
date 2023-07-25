@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 
 import '../../library/Common.dart';
 
+
+
 class LocationPage extends StatefulWidget {
   @override
   _LocationPageState createState() => _LocationPageState();
@@ -15,6 +17,10 @@ class _LocationPageState extends State<LocationPage> {
   TextEditingController dateDebutController = TextEditingController();
   TextEditingController dateFinController = TextEditingController();
   TextEditingController dureeLocationController = TextEditingController();
+
+
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ int? id;
 Property? property;
 List<Niveau>? niveaux;
 String? dimension;
+String? miseEnVenteOuLocation ;
 String? typeDocment;
 bool? garage;
 int? capaciteGarage;
@@ -21,6 +22,7 @@ Maison({
   this.garage,
   this.capaciteGarage,
   this.cour,
+  this.miseEnVenteOuLocation
 });
 
 factory Maison.fromJson(Map<String, dynamic> json) => Maison(
@@ -32,6 +34,7 @@ typeDocment: json["typeDocment"],
 garage: json["garage"],
 capaciteGarage: json["capaciteGarage"],
 cour: json["cour"],
+miseEnVenteOuLocation: json["miseEnVenteOuLocation"],
 );
 
 Map<String, dynamic> toJson() => {
@@ -43,5 +46,6 @@ Map<String, dynamic> toJson() => {
 "garage": garage,
 "capaciteGarage": capaciteGarage,
 "cour": cour,
+"miseEnVenteOuLocation": miseEnVenteOuLocation,
 };
 }

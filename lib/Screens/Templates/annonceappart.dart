@@ -32,7 +32,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
   TextEditingController nbCuisineExtController = TextEditingController();
   TextEditingController nbCuisineIntController = TextEditingController();
   TextEditingController nbSalonController = TextEditingController();
-  TextEditingController typeAppartController = TextEditingController();
+  TextEditingController miseEnVenteOuLocationController = TextEditingController();
   TextEditingController extraController = TextEditingController();
   TextEditingController nbtoiletteController = TextEditingController();
 
@@ -160,6 +160,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
 
                   TextFormField(
                     controller: nbCuisineIntController,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "nb de cuisine intérieure",
                       enabledBorder: OutlineInputBorder(
@@ -182,6 +183,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                   ),    SizedBox(height: 10.0,),
               TextFormField(
                     controller: nbCuisineExtController,
+                keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "nb de cuisine extérieure",
                       enabledBorder: OutlineInputBorder(
@@ -202,6 +204,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                   ),    SizedBox(height: 10.0,),
               TextFormField(
                     controller: nbSalonController,
+                keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "nb de salon",
                       enabledBorder: OutlineInputBorder(
@@ -222,6 +225,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                   ),SizedBox(height: 10.0,),
               TextFormField(
                     controller: nbtoiletteController,
+                keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       hintText: "nb de toilette",
                       enabledBorder: OutlineInputBorder(
@@ -241,9 +245,9 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                   ),
                   ),  SizedBox(height: 10.0,),
               TextFormField(
-                    controller: typeAppartController,
+                    controller:miseEnVenteOuLocationController,
                     decoration: InputDecoration(
-                      hintText: "type d ' Appart",
+                      hintText: "Mettre en vente ou en location",
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(80),
                         borderSide:
@@ -259,7 +263,28 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                       contentPadding:
                       EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                   ),
-                  ),     SizedBox(height: 10.0,),
+              ),
+                  // ), TextFormField(
+                  //   controller: typeAppartController,
+                  //   decoration: InputDecoration(
+                  //     hintText: "type d ' Appart",
+                  //     enabledBorder: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(80),
+                  //       borderSide:
+                  //       const BorderSide(color: Colors.transparent, width: 0.0),
+                  //     ),
+                  //     border: OutlineInputBorder(
+                  //       borderRadius: BorderRadius.circular(80),
+                  //       borderSide:
+                  //       const BorderSide(color: Colors.transparent, width: 0.0),
+                  //     ),
+                  //     filled: true,
+                  //     fillColor: darkGrey,
+                  //     contentPadding:
+                  //     EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                  // ),
+                  // ),
+                  SizedBox(height: 10.0,),
               TextFormField(
                     controller: extraController,
                     decoration: InputDecoration(
@@ -370,7 +395,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
     Property property = Property();
     property.adresse= adresseController.text;
     property.description= descriptionController.text;
-    property.type= typeAppartController.text;
+    // property.type= typeAppartController.text;
 
     Appart appart= Appart();
     appart.magasin = magasin ;
@@ -380,13 +405,15 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
     appart.electricite=electricite;
     appart.electriciteSeparee=electriciteSeparee;
 
-    appart.nbcuisineInt= nbCuisineIntController.text as int;
-    appart.nbcuisineExt=nbCuisineExtController.text as int ;
-    appart.nbchambre= nbChambreController.text as int;
-    appart.nbsalon= nbSalonController.text as int;
-    appart.nbtoilette= nbtoiletteController.text as int;
+    appart.nbcuisineInt= int.parse(nbCuisineIntController.text) ;
+    appart.nbcuisineExt=int.parse(nbCuisineExtController.text) ;
+    appart.nbchambre= int.parse(nbChambreController.text);
+    appart.nbsalon= int.parse(nbSalonController.text);
+    appart.nbtoilette= int.parse(nbtoiletteController.text);
+    appart.miseEnVenteOuLocation= miseEnVenteOuLocationController.text ;
 
     property.appart = appart;
+    appart.property = property;
     final response = await ApiProvider.addPropertyToOwner(jsonEncode(property));
     print(response);
   }
