@@ -411,10 +411,11 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
     appart.nbsalon= int.parse(nbSalonController.text);
     appart.nbtoilette= int.parse(nbtoiletteController.text);
     appart.miseEnVenteOuLocation= miseEnVenteOuLocationController.text ;
+    appart.extra= extraController.text;
 
     property.appart = appart;
     appart.property = property;
-    final response = await ApiProvider.addPropertyToOwner(jsonEncode(property));
+    final response = await ApiProvider.addPropertyToOwner(property.toJson());
     print(response);
   }
 }

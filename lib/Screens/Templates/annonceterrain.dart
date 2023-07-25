@@ -283,7 +283,7 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
 
    property.terrain = terrain;
    terrain.property=property;
-    final response = await ApiProvider.addPropertyToOwner(jsonEncode(property));
+    final response = await ApiProvider.addPropertyToOwner(property.toJson());
     print(response);
 
   }

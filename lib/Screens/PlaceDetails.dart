@@ -175,7 +175,7 @@ class PlaceDetails extends StatelessWidget {
                             placeModel.statut,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 15
+                            fontSize: 13.0
                           ),
                         ),
                       ),
