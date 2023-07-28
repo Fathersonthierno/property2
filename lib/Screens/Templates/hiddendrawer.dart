@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:property2/Screens/HomePage.dart';
 import 'package:property2/Screens/RegisterScreen.dart';
+import 'package:property2/Screens/Templates/meslocation.dart';
 
 import '../../introduction_animation/components/welcome_view.dart';
 
@@ -16,8 +17,8 @@ class _HiddenDrawerState extends State<HiddenDrawer> with TickerProviderStateMix
   List<ScreenHiddenDrawer> pages = [];
   final mytextestyle = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 14,
-    color: Colors.white,
+    fontSize: 15.0,
+    color: Colors.black,
 
   );
   @override
@@ -29,7 +30,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> with TickerProviderStateMix
 
   pages = [
     ScreenHiddenDrawer(
-      ItemHiddenMenu(colorLineSelected: Colors.deepPurple.shade100,
+      ItemHiddenMenu(colorLineSelected: Colors.deepPurple.shade50,
 
         name: "Page d'accueil",
           baseStyle: mytextestyle,
@@ -44,7 +45,7 @@ class _HiddenDrawerState extends State<HiddenDrawer> with TickerProviderStateMix
             baseStyle: mytextestyle,
             selectedStyle: TextStyle()
         ),
-        HomePage()
+        MesLocations()
 
     ),
     ScreenHiddenDrawer(
@@ -59,7 +60,6 @@ class _HiddenDrawerState extends State<HiddenDrawer> with TickerProviderStateMix
     ),
     ScreenHiddenDrawer(
         ItemHiddenMenu(colorLineSelected: Colors.deepPurple.shade50,
-
             name: "Page d'inscription",
             baseStyle: mytextestyle,
             selectedStyle: TextStyle(),
@@ -87,10 +87,10 @@ class _HiddenDrawerState extends State<HiddenDrawer> with TickerProviderStateMix
   }
   Widget build(BuildContext context) {
     return HiddenDrawerMenu(
-        // backgroundColorAppBar: Colors.grey[300],
+        backgroundColorAppBar: Colors.deepPurple.shade300,
         screens: pages,
 
-        backgroundColorMenu: Colors.deepPurple.shade200,
+        backgroundColorMenu: Colors.deepPurple.shade100,
         initPositionSelected: 0,
         slidePercent: 40,
 

@@ -198,6 +198,7 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                     });
                   },
                   value: garage,
+                    activeColor: Colors.deepPurple.shade300
                 ),
               ),SizedBox(height: 10.0,),
               TextFormField(
@@ -227,9 +228,11 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   onChanged: (bool value) {
                     setState(() {
                       cour = value;
+
                     });
                   },
                   value: cour,
+                    activeColor: Colors.deepPurple.shade300
                 ),
               ),
 

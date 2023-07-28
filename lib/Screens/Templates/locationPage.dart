@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:property2/Models/Datamodel/meslocations.dart';
+import 'package:property2/model/operation.dart';
 
 import '../../library/Common.dart';
 
@@ -7,10 +9,12 @@ import '../../library/Common.dart';
 
 class LocationPage extends StatefulWidget {
   @override
-  _LocationPageState createState() => _LocationPageState();
+  _LocationPageState createState(
+      ) => _LocationPageState();
 }
 
 class _LocationPageState extends State<LocationPage> {
+  LocationProvider locationProvider = LocationProvider();
 
   bool _formSubmitted = false;
 
@@ -18,8 +22,9 @@ class _LocationPageState extends State<LocationPage> {
   TextEditingController dateFinController = TextEditingController();
   TextEditingController dureeLocationController = TextEditingController();
 
-
-
+// void sub(){
+//   locationProvider.meslocations.add(MesLocations(dureeDeLocation: dureeLocationController.text, dateDedebut: dateDebutController.text, dateDeFin: dateFinController.text));
+// }
 
 
   @override
@@ -53,7 +58,7 @@ class _LocationPageState extends State<LocationPage> {
         EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                       icon: Icon(Icons.text_fields)
                     ),
-                    controller: dureeLocationController,
+                    controller: dureeLocationController
                     // onTap: () async {
                     //   DateTime? duration = await showDatePicker(context: context,
                     //       initialDate: DateTime.now(),
@@ -198,5 +203,7 @@ style: ElevatedButton.styleFrom(
     );
   }
 
+
 }
+
 

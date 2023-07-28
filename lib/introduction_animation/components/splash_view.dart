@@ -38,7 +38,7 @@ class SplashViewState extends State<SplashView> {
             const Padding(
               padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Text(
-                "soyez tranquille",
+                "Restez serein",
                 style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
               ),
             ),
@@ -46,7 +46,7 @@ class SplashViewState extends State<SplashView> {
             const Padding(
               padding: EdgeInsets.only(left: 64, right: 64),
               child: Text(
-                "votre satisfaction notre priorité",
+                "votre satisfaction,notre engagement",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25,

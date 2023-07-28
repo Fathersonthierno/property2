@@ -83,7 +83,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                   //   controller: descriptionController,
                   //     hintText: 'description'),
                  ListTile(
-                       title: Text("couloir"),
+                       title: Text("Couloir"),
                    trailing: Switch(
                      onChanged: (bool value) {
                        setState(() {
@@ -91,12 +91,13 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                        });
                      },
                      value: couloir,
+                       activeColor: Colors.deepPurple.shade300
                    ),
 
                  ),
                   SizedBox(height: 10.0,),
                   ListTile(
-                    title: Text("eau"),
+                    title: Text("Eau"),
                     trailing: Switch(
                       onChanged: (bool value) {
                         setState(() {
@@ -104,10 +105,11 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                         });
                       },
                       value: eau,
+                        activeColor: Colors.deepPurple.shade300
                     ),
                   ),    SizedBox(height: 10.0,),
               ListTile(
-                    title: Text("electricité"),
+                    title: Text("Electricité"),
                 trailing: Switch(
                   onChanged: (bool value) {
                     setState(() {
@@ -115,21 +117,22 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                     });
                   },
                   value: electricite,
+                    activeColor: Colors.deepPurple.shade300
                 ),
                   ),
                   ListTile(
-                    title: Text("eau separée"),
+                    title: Text("Eau separée"),
                    trailing: Switch( onChanged: (bool value) {
                       setState(() {
                         eauSepare=value;
                       });
                     }, value: eauSepare,
-                 activeColor: Colors.cyanAccent
+                       activeColor: Colors.deepPurple.shade300
                   )
                     // secondary: Icon(Icons.house_outlined),
                   ),     SizedBox(height: 10.0,),
               ListTile(
-                    title: Text("electricité séparée"),
+                    title: Text("Electricité séparée"),
                     trailing: Switch(
                       onChanged: (bool value) {
                         setState(() {
@@ -137,6 +140,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                         });
                       },
                       value: electriciteSeparee,
+                        activeColor: Colors.deepPurple.shade300
                     ),
                   ),    SizedBox(height: 10.0,),
                   // TextField(
@@ -144,7 +148,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                   //   decoration: InputDecoration(labelText: 'Images'),
                   // ),
                   ListTile(
-                    title: Text("magasin"),
+                    title: Text("Magasin"),
                     trailing: Switch(
                       onChanged: (bool value) {
                         setState(() {
@@ -152,8 +156,10 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                         });
                       },
                       value: magasin,
+                      activeColor: Colors.deepPurple.shade300,
                     ),
                   ),    SizedBox(height: 10.0,),
+
                   // input(
                   //   controller: nbChambreController,
                   //     hintText: 'nb de chambre'),
@@ -162,7 +168,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                     controller: nbCuisineIntController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: "nb de cuisine intérieure",
+                      hintText: "Nb de cuisine intérieure",
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(80),
                         borderSide:
@@ -185,7 +191,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                     controller: nbCuisineExtController,
                 keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: "nb de cuisine extérieure",
+                      hintText: "Nb de cuisine extérieure",
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(80),
                         borderSide:
@@ -206,7 +212,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                     controller: nbSalonController,
                 keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: "nb de salon",
+                      hintText: "Nb de salon",
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(80),
                         borderSide:
@@ -227,7 +233,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                     controller: nbtoiletteController,
                 keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: "nb de toilette",
+                      hintText: "Nb de toilette",
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(80),
                         borderSide:

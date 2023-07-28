@@ -6,6 +6,7 @@ import 'package:property2/Models/Datamodel/PlaceModel.dart';
 import 'package:property2/Models/constants.dart';
 import 'package:property2/Screens/Templates/hiddendrawer.dart';
 import 'package:property2/Screens/Templates/locationPage.dart';
+import 'package:property2/Screens/Templates/pageAchat.dart';
 
 class PlaceDetails extends StatelessWidget {
   final PlaceModel placeModel;
@@ -159,12 +160,21 @@ class PlaceDetails extends StatelessWidget {
                       ),
 
                       onPressed: () {
-    Navigator.pushReplacement(
-    context,
-    PageTransition(
-    type: PageTransitionType.fade,
-    child: LocationPage()));
 
+    if (placeModel.statut == "Louer ce bien"){
+
+      Navigator.pushReplacement(
+          context,
+          PageTransition(
+              type: PageTransitionType.fade,
+              child: LocationPage()));
+    }
+    else
+      Navigator.pushReplacement(
+          context,
+          PageTransition(
+              type: PageTransitionType.fade,
+              child: AchatPage()));
     },
                       child: Container(
                         decoration: BoxDecoration(

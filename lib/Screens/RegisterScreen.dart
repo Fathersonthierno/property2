@@ -13,7 +13,6 @@ import 'package:property2/screens/Login_Page.dart';
 
 class RegisterScreen extends StatefulWidget {
 
-
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -70,12 +69,71 @@ Widget input({String? labelText, String? hintText, TextEditingController? contro
 
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController firstnameController = TextEditingController();
+  TextEditingController? firstnameController = TextEditingController();
   TextEditingController? lastnameController = TextEditingController();
   TextEditingController? emailController = TextEditingController();
   TextEditingController? passwordController = TextEditingController();
   TextEditingController? roleController = TextEditingController();
+  TextEditingController? telephoneController = TextEditingController();
+var obscuredText ;
   String? dropdownValue ;
+  Widget input1({String? labelText, String? hintText, TextEditingController? controller}) {
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 15, bottom: 5),
+            child: Text(
+              labelText.toString(),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 8, right: 8, bottom: 15),
+            child: TextFormField(
+              obscureText: obscuredText,
+              controller: controller,
+              decoration: InputDecoration(
+                suffixIcon:IconButton( padding: EdgeInsetsDirectional.only(end: 20.0),
+    icon : obscuredText ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off),
+    onPressed: () {
+     setState(() {
+       obscuredText = !obscuredText;
+     });
+    },
+
+    ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(80),
+                  borderSide:
+                  const BorderSide(color: Colors.transparent, width: 0.0),
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(80),
+                  borderSide:
+                  const BorderSide(color: Colors.transparent, width: 0.0),
+                ),
+                // disabledBorder: new InputBorder(borderSide: BorderSide.none),
+                hintStyle: TextStyle(fontSize: 12, fontStyle: FontStyle.italic),
+                filled: true,
+                fillColor: darkGrey,
+                contentPadding:
+                EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+
+                hintText: hintText,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
   Widget inputDropDown({String? labelText, String? hintText}) {
     return Expanded(
       child: Column(
@@ -126,6 +184,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
   @override
+  void initState(){
+    super.initState();
+    obscuredText = true ;
+
+  }
+
+
+  @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
@@ -189,8 +256,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // )], ),
                     Row(
                       children: <Widget>[
-                        input(labelText: "Prenom", hintText: "prenom" , controller: firstnameController),
-                        input(labelText: "Nom", hintText: "nom" , controller: lastnameController),
+                        input(labelText: "Prenom", hintText: "Thierno" , controller: firstnameController),
+                        input(labelText: "Nom", hintText: "Tall" , controller: lastnameController),
                       ],
                     ),
 
@@ -198,6 +265,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       children: [
                         inputDropDown(
                           labelText: "Type utilisateur", hintText: "choisissez un type"
+                        )
+                      ],
+                    ),   Row(
+                      children: [
+                        input(
+                          labelText: "Numéro de télephone", hintText: "+223 79944732", controller: telephoneController
                         )
                       ],
                     ),
@@ -209,7 +282,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     Row(
                       children: <Widget>[
-                        input(labelText: "mot de pass", hintText: "********" , controller: passwordController),
+                        input1(labelText: "mot de pass", hintText: "********" , controller: passwordController),
                       ],
                     ),
                     SizedBox(height: 20,),
@@ -280,17 +353,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Divider(
-                        height: 80.0,
+                        height: 5.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Already have a account?",
+                            "Avez-vous déjà un compte ?",
                             style: TextStyle(),
                           ),
                           TextButton(
@@ -304,7 +377,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: LoginPage()));
                             },
                             child: Text(
-                              "Login ",
+                              "Connexion",
                               style: TextStyle(
                                   color: primaryColor,
                                   fontWeight: FontWeight.bold),
@@ -330,6 +403,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       'lastname': lastnameController?.text ,
       'email': emailController?.text ,
       'password': passwordController?.text ,
+      'telephone': telephoneController?.text ,
       'typeUtilisateur': dropdownValue
     } ;
    final response = await ApiProvider.register(data);
