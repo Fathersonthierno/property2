@@ -21,7 +21,7 @@ class ApiProvider {
     return http.post(Uri.parse('$url/api/v1/auth/register'), headers: headers , body: jsonEncode(data), encoding: Encoding.getByName("utf-8"));
   }
   static Future<http.Response> authenticate(data) async {
-   return http.post(Uri.parse('$url/api/v1/auth/authenticate'), headers: headers , body: data, encoding: Encoding.getByName("utf-8"));
+   return http.post(Uri.parse('$url/api/v1/auth/authenticate'), headers: headers , body: jsonEncode(data), encoding: Encoding.getByName("utf-8"));
  }
 
  static Future<http.Response> addPropertyToOwner(data) async {
@@ -30,7 +30,34 @@ class ApiProvider {
    HttpHeaders.authorizationHeader: 'Bearer $token',
    HttpHeaders.contentTypeHeader: 'application/json'
   };
-  return client.post(Uri.parse('$url/owner/properties'), body: jsonEncode(data), headers: tokenHeaders, encoding: Encoding.getByName("utf-8"));
+  return http.post(Uri.parse('$url/owner/properties'), body: jsonEncode(data), headers: tokenHeaders, encoding: Encoding.getByName("utf-8"));
+ }
+
+static Future<http.Response> addOperation(data) async {
+  String token = (await LocalStorage.getToken()).toString();
+  var tokenHeaders = {
+   HttpHeaders.authorizationHeader: 'Bearer $token',
+   HttpHeaders.contentTypeHeader: 'application/json'
+  };
+  return http.post(Uri.parse('$url/operation'), body: jsonEncode(data), headers: tokenHeaders, encoding: Encoding.getByName("utf-8"));
+ }
+
+ static Future<http.Response> getOperation(data) async {
+  String token = (await LocalStorage.getToken()).toString();
+  var tokenHeaders = {
+   HttpHeaders.authorizationHeader: 'Bearer $token',
+   HttpHeaders.contentTypeHeader: 'application/json'
+  };
+  return http.get(Uri.parse('$url/operation/get'), headers: tokenHeaders,);
+ }
+
+ static Future<http.Response> findAllProperties() async {
+  String token = (await LocalStorage.getToken()).toString();
+  var tokenHeaders = {
+   HttpHeaders.authorizationHeader: 'Bearer $token',
+   HttpHeaders.contentTypeHeader: 'application/json'
+  };
+  return http.get(Uri.parse('$url/property'), headers: tokenHeaders, );
  }
 
 }

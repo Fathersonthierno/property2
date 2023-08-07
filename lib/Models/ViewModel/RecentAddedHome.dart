@@ -3,11 +3,17 @@ import 'package:glassmorphism_ui/glassmorphism_ui.dart';
 import 'package:icons_flutter/icons_flutter.dart';
 import 'package:property2/Models/Datamodel/PlaceModel.dart';
 import 'package:property2/Screens/PlaceDetails.dart';
+import 'package:property2/model/property.dart';
 
-class RecentAdded extends StatelessWidget {
-  final PlaceModel placeModel;
-  RecentAdded({required this.placeModel});
+class RecentAdded extends StatefulWidget {
+  final Property property;
+  RecentAdded({required this.property});
 
+  @override
+  State<RecentAdded> createState() => _RecentAddedState();
+}
+
+class _RecentAddedState extends State<RecentAdded> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -16,7 +22,7 @@ class RecentAdded extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PlaceDetails(placeModel: placeModel),
+            builder: (context) => PlaceDetails(property: widget.property),
           ),
         );
       },
@@ -53,13 +59,18 @@ class RecentAdded extends StatelessWidget {
                 Stack(
                   children: [
                     Hero(
-                      tag: placeModel.title,
+                      tag: "${widget.property.titre}" ,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(24),
-                        child: Image(
+                        child:  widget.property.images != null ?
+                        Image(
                           fit: BoxFit.cover,
-                          image: AssetImage(placeModel.imagePath),
-                        ),
+                          image: ImageUtils.imageFromBase64String(widget.property.images?[0].piece).image,
+                        )
+                            : Container(
+                          color:  Colors.blueAccent,
+                          height: 220,
+                          width: 120,),
                       ),
                     ),
                     Positioned(
@@ -84,7 +95,7 @@ class RecentAdded extends StatelessWidget {
                         child: Center(
                             child: RichText(
                           text: TextSpan(
-                            text: "\ Fcfa ${placeModel.rent.toString()} / ",
+                            text: "\ Fcfa ${widget.property.prix.toString()} / ",
                             style: textTheme.titleLarge,
                             children: <TextSpan>[
                               TextSpan(
@@ -102,7 +113,7 @@ class RecentAdded extends StatelessWidget {
                   height: 12,
                 ),
                 Text(
-                  placeModel.title,
+                 "${widget.property.titre}",
                   style: textTheme.titleLarge?.apply(
                     color: Colors.black,
                   ),

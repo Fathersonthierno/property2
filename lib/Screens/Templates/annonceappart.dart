@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:property2/library/Common.dart';
 import 'package:property2/model/appart.dart';
@@ -21,6 +23,7 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
   bool eauSepare = false;
   bool eau = false;
   bool couloir = false;
+
   // late File imageFile;
   TextEditingController adresseController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -35,6 +38,8 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
   TextEditingController miseEnVenteOuLocationController = TextEditingController();
   TextEditingController extraController = TextEditingController();
   TextEditingController nbtoiletteController = TextEditingController();
+
+  List<File> images = [];
 
   // TextEditingController imagesController = TextEditingController();
 
@@ -312,19 +317,24 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
                   ),
                   ),
                   SizedBox(height: 40),
-                  Container(
-                    padding: EdgeInsets.all(16.0),
-                    child: Center(
-                      child: Icon(Icons.camera_alt,
-                        color: Colors.deepPurple.shade300,
-                        size: 60,
+                    Container(
+                     padding: EdgeInsets.all(16.0),
+                      child: Center(
+                        child:ElevatedButton(
+                          onPressed: (){
+                            chooseImages();
+                          },
+                        child: Icon(Icons.camera_alt,
+                          color: Colors.deepPurple.shade300,
+                          size: 60,
+                        ),
                       ),
+                      // child: Image.asset(
+                      //   'assets/introduction_animation/camera.png',
+                      //       color: Colors.deepPurple.shade300
+                      // ),
+
                     ),
-                    // child: Image.asset(
-                    //   'assets/introduction_animation/camera.png',
-                    //       color: Colors.deepPurple.shade300
-                    // ),
-                    
                   ),
                   ElevatedButton(
 
@@ -424,7 +434,24 @@ class _AnnonceAppartPageState extends State<AnnonceAppartPage> {
     final response = await ApiProvider.addPropertyToOwner(property.toJson());
     print(response);
   }
+  chooseImages() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['doc', 'docx', 'jpg', 'png', 'pdf'],
+      allowMultiple: true,
+    );
+
+    if (result != null) {
+      result.files.forEach((element) {
+        setState(() {
+          images.add(File(element.path!));
+        });
+      });
+    }
+  }
+
 }
+
 // Widget input({String? labelText, String? hintText, TextEditingController? controller}) {
 //   return Expanded(
 //     child: Column(

@@ -1,13 +1,20 @@
+import 'dart:convert';
+
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:http/http.dart';
 import 'package:icons_flutter/icons_flutter.dart';
 import 'package:property2/Models/Datamodel/PlaceModel.dart';
 import 'package:property2/Models/ViewModel/BestOffer.dart';
 import 'package:property2/Models/ViewModel/RecentAddedHome.dart';
 import 'package:property2/Models/constants.dart';
 import 'package:property2/Screens/Templates/hiddendrawer.dart';
+import 'package:property2/network/api.provider.dart';
 
+import '../model/property.dart';
 import 'Templates/AccountPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +23,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<Property> recentAdd = [];
+  List<Property> bestOffer = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+
+  }
+
+  void loadData() async{
+    var data = await ApiProvider.findAllProperties();
+      print("AAAAA");
+      print(data.body);
+
+    //    data = jsonDecode(value.body),
+    //   print(data),
+    //    setState((){
+    //      recentAdd = List<Property>.from(data.map((x) => Property.fromJson(x)));
+    //      bestOffer = recentAdd ;
+    //    })
+  }
+  List<Widget> getRecentAddList() {
+    List<Widget> list = [];
+    recentAdd.forEach((element) => list.add(RecentAdded(property: element))) ;
+    return list;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -177,14 +215,8 @@ class _HomePageState extends State<HomePage> {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: false,
-                    children: [
-                      RecentAdded(
-                        placeModel: placeCollection[0],
-                      ),
-                      RecentAdded(
-                        placeModel: placeCollection[1],
-                      ),
-                    ],
+                    children:
+                      getRecentAddList()
                   ),
                 ),
                 SizedBox(height: 50),
@@ -212,9 +244,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                // ] ),
                 SizedBox(height: 30),
+                recentAdd.length>0?
                 BestOffer(
-                  placeModel: placeCollection[2],
+                  property: recentAdd[0],
+                )
+                : Container(
+
                 ),
+
                 SizedBox(height: 60),
               ],
             ),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class PlaceModel {
@@ -49,3 +51,9 @@ List<PlaceModel> placeCollection = [
     imagePath: "assets/images/image7.jpg",
   ),
 ];
+
+class ImageUtils {
+  static Image imageFromBase64String(String base64String) {
+    return Image.memory(base64Decode(base64String));
+  }
+}

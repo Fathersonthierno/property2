@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:property2/Screens/Templates/annonceappart.dart';
 import 'package:property2/library/Common.dart';
@@ -23,6 +25,8 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
   // TextEditingController imagesController = TextEditingController();
   TextEditingController ownerIdController = TextEditingController();
   TextEditingController miseEnVenteOuLocationController = TextEditingController();
+
+  List<File> images = [];
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +197,11 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
               Container(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
-                  child: Icon(Icons.camera_alt,
+                  child:ElevatedButton(
+                    onPressed: (){
+                      chooseImages();
+                    },
+                    child: Icon(Icons.camera_alt,
                     color: Colors.deepPurple.shade300,
                     size: 60,
                   ),
@@ -203,6 +211,7 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
                 //       color: Colors.deepPurple.shade300
                 // ),
 
+              ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -286,5 +295,20 @@ class _AnnonceTerrainPageState extends State<AnnonceTerrainPage> {
     final response = await ApiProvider.addPropertyToOwner(property.toJson());
     print(response);
 
+  }
+  chooseImages() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['doc', 'docx', 'jpg', 'png', 'pdf'],
+      allowMultiple: true,
+    );
+
+    if (result != null) {
+      result.files.forEach((element) {
+        setState(() {
+          images.add(File(element.path!));
+        });
+      });
+    }
   }
 }

@@ -21,6 +21,9 @@ class Property {
   Appart? appart;
   Terrain? terrain;
   String? adresse;
+  int? prix;
+  String? titre;
+  String? statut;
   String? description;
   String? type;
   PropertyOwner? owner;
@@ -38,6 +41,9 @@ class Property {
     this.owner,
     this.operations,
     this.images,
+    this.prix,
+    this.titre,
+    this.statut
   });
 
   factory Property.fromJson(Map<String, dynamic> json) => Property(
@@ -46,6 +52,9 @@ class Property {
     appart: json["appart"] == null ? null : Appart.fromJson(json["appart"]),
     terrain: json["terrain"] == null ? null : Terrain.fromJson(json["terrain"]),
     adresse: json["adresse"],
+    prix: json["prix"],
+    titre: json["titre"],
+    statut: json["statut"],
     description: json["description"],
     type: json["type"],
     owner: json["owner"] == null ? null : PropertyOwner.fromJson(json["owner"]),
@@ -59,6 +68,9 @@ class Property {
     "appart": appart?.toJson(),
     "terrain": terrain?.toJson(),
     "adresse": adresse,
+    "prix": prix,
+    "titre": titre,
+    "statut": statut,
     "description": description,
     "type": type,
     "owner": owner?.toJson(),

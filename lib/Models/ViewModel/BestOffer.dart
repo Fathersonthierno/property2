@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:icons_flutter/icons_flutter.dart';
 import 'package:property2/Models/Datamodel/PlaceModel.dart';
+import 'package:property2/model/property.dart';
 
 import '../../Screens/PlaceDetails.dart';
 
 class BestOffer extends StatelessWidget {
-  final PlaceModel placeModel;
-  BestOffer({required this.placeModel});
+  final Property property;
+  BestOffer({required this.property});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class BestOffer extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PlaceDetails(placeModel: placeModel),
+              builder: (context) => PlaceDetails(property: property),
             ),
           );
         },
@@ -52,12 +53,18 @@ class BestOffer extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(24),
-                  child: Image(
+                  child: property.images != null ?
+                  Image(
                     height: 220,
                     width: 120,
                     fit: BoxFit.cover,
-                    image: AssetImage(placeModel.imagePath),
-                  ),
+                    image:
+                    ImageUtils.imageFromBase64String(property.images?[0].piece).image
+                  )
+                      : Container(
+                    color:  Colors.blueAccent,
+                    height: 220,
+                    width: 120,),
                 ),
                 SizedBox(
                   width: 10,
@@ -70,7 +77,7 @@ class BestOffer extends StatelessWidget {
                         height: 12,
                       ),
                       Text(
-                        placeModel.title,
+                       "${property.titre}",
                         style: textTheme.titleLarge?.apply(
                           color: Colors.black,
                         ),
@@ -184,7 +191,7 @@ class BestOffer extends StatelessWidget {
                       ),
                       RichText(
                         text: TextSpan(
-                          text: "\ Fcfa ${placeModel.rent.toString()} / ",
+                          text: "\ Fcfa ${property.prix} / ",
                           style: textTheme.titleLarge?.apply(
                             color: Colors.black,
                           ),

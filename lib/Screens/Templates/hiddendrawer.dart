@@ -3,6 +3,7 @@ import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:property2/Screens/HomePage.dart';
 import 'package:property2/Screens/RegisterScreen.dart';
 import 'package:property2/Screens/Templates/meslocation.dart';
+import 'package:property2/Screens/login_page.dart';
 
 import '../../introduction_animation/components/welcome_view.dart';
 
@@ -60,15 +61,14 @@ class _HiddenDrawerState extends State<HiddenDrawer> with TickerProviderStateMix
     ),
     ScreenHiddenDrawer(
         ItemHiddenMenu(colorLineSelected: Colors.deepPurple.shade50,
-            name: "Page d'inscription",
+            name: "Page d'authentification",
             baseStyle: mytextestyle,
             selectedStyle: TextStyle(),
 
 
         ),
- RegisterScreen()
+ LoginPage()
  // WelcomeView(animationController: AnimationController(duration: Duration(seconds: 2), vsync:  )),
-
     ),
  // ScreenHiddenDrawer(
  //        ItemHiddenMenu(colorLineSelected: Colors.deepPurple.shade50,

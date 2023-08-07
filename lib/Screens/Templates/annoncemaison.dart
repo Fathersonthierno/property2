@@ -1,12 +1,19 @@
 
 import 'dart:convert';
+import 'dart:typed_data';
+import 'dart:io';
+import 'package:path/path.dart';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:property2/library/Common.dart';
 import 'package:property2/model/maison.dart';
 import 'package:property2/model/property.dart';
+import 'package:property2/model/property_image.dart';
+import 'package:property2/network/utils.dart';
 
+import '../../Models/Datamodel/meslocations.dart';
 import '../../network/api.provider.dart';
 
 class AnnonceMaisonPage extends StatefulWidget {
@@ -17,6 +24,22 @@ class AnnonceMaisonPage extends StatefulWidget {
 class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
   bool garage = false ;
   bool cour = false ;
+
+  // late List<File> images;
+  //
+  // if (images != null) {
+  // for (int i = 0; i < images.length; i++) {
+  // Uint8List imgbytes = await image[i].readAsBytes();
+  // String bs4str = base64.encode(imgbytes);
+  // Attachment identityDocAttachment = new Attachment();
+  // imageAttachment.piece = bs4str;
+  // imageAttachment.date = DateTime.now();
+  // imageAttachment.pieceContentType = image.extension;
+  // imageAttachment.type = 'identity_doc';
+  // imageAttachment.name = 'image 1';
+  // Property.images.add(imageAttachment);
+  // }
+  // }
   // late File imageFile;
   TextEditingController adresseController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -25,9 +48,22 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
   TextEditingController dimensionController = TextEditingController();
   TextEditingController garageController = TextEditingController();
   TextEditingController typeDocumentController = TextEditingController();
-  TextEditingController typeMaisonController = TextEditingController();
+  TextEditingController titreController = TextEditingController();
+  TextEditingController prixController = TextEditingController();
   TextEditingController miseEnVenteOuLocationController = TextEditingController();
 
+   List<File> images = [];
+
+   // if (images != null) {
+   //   for (int i = 0; i < images.length; i++) {
+   //     Uint8List imgbytes = await images[i].readAsBytes();
+   //     String bs4str = base64.encode(imgbytes);
+   //     Attachment identityDocAttachment = new Attachment();
+   //     imageAttachment.piece = bs4str;
+   //     imageAttachment.date = DateTime.now();
+   //     imageAttachment.pieceContentType = image.extension;
+   //     imageAttachment.type = 'identity_doc';
+   //     imageAttachment.name = 'image 1';
   // TextEditingController imagesController = TextEditingController();
   // TextEditingController ownerIdController = TextEditingController();
 
@@ -88,6 +124,25 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   contentPadding:
                   EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
+              ), TextFormField(
+                controller: adresseController,
+                decoration: InputDecoration(
+                  hintText: "Titre",
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(80),
+                    borderSide:
+                    const BorderSide(color: Colors.transparent, width: 0.0),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(80),
+                    borderSide:
+                    const BorderSide(color: Colors.transparent, width: 0.0),
+                  ),
+                  filled: true,
+                  fillColor: darkGrey,
+                  contentPadding:
+                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                ),
               ),SizedBox(height: 10.0,),
               TextFormField(
                 controller: descriptionController,
@@ -133,6 +188,26 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                 controller: miseEnVenteOuLocationController,
                 decoration: InputDecoration(
                   hintText: "Mettre en vente ou en location",
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(80),
+                    borderSide:
+                    const BorderSide(color: Colors.transparent, width: 0.0),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(80),
+                    borderSide:
+                    const BorderSide(color: Colors.transparent, width: 0.0),
+                  ),
+                  filled: true,
+                  fillColor: darkGrey,
+                  contentPadding:
+                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                ),
+              ),TextFormField(
+                controller: prixController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: "Prix",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
@@ -249,9 +324,14 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
               Container(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
-                  child: Icon(Icons.camera_alt,
-                    color: Colors.deepPurple.shade300,
-                    size: 60,
+                  child: ElevatedButton(
+                    onPressed: (){
+                      chooseImages();
+                    },
+                    child: Icon(Icons.camera_alt,
+                      color: Colors.deepPurple.shade300,
+                      size: 60,
+                    ),
                   ),
                 ),
                 // child: Image.asset(
@@ -269,6 +349,7 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                 ),
                 onPressed: () {
                   save();
+
                 },
                   //     // Créer un nouvel objet Property à partir des données du formulaire
                   //     Property newProperty = Property(
@@ -331,23 +412,56 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
     Property property = Property();
     property.adresse= adresseController.text;
     property.description= descriptionController.text;
+    property.titre = titreController.text;
+    property.prix = int.parse(prixController.text);
+    property.statut= miseEnVenteOuLocationController.text;
     // property.type= typeMaisonController.text;
     
     Maison maison = Maison();
     maison.cour=cour;
     maison.garage=garage;
     maison.capaciteGarage= int.parse(capaciteGarageController.text);
-    maison.miseEnVenteOuLocation= miseEnVenteOuLocationController.text;
     maison.typeDocment= typeDocumentController.text;
     maison.dimension= dimensionController.text;
 
-    
+    if (images != null) {
+      List<PropertyImage> propertyImages = [];
+      for (int i = 0; i < images.length; i++) {
+        File image = images[0];
+        Uint8List imgbytes = await image.readAsBytes();
+        String bs4str = base64.encode(imgbytes);
+        PropertyImage img = new PropertyImage();
+        img.piece = bs4str;
+        img.date = DateTime.now();
+        img.pieceContentType = image.extension;
+        img.name = 'image '+ i.toString();
+        propertyImages.add(img);
+      }
+      property.images = propertyImages;
+    }
     property.maison = maison ;
-    maison.property= property;
+    print(property.toJson());
+    // maison.property= property;
     final response = await ApiProvider.addPropertyToOwner(property.toJson());
     print(response);
 
   }
+  chooseImages() async {
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+  type: FileType.custom,
+  allowedExtensions: ['doc', 'docx', 'jpg', 'png', 'pdf'],
+  allowMultiple: true,
+  );
+
+  if (result != null) {
+  result.files.forEach((element) {
+  setState(() {
+  images.add(File(element.path!));
+  });
+  });
+  }
+  }
+
 }
 
 

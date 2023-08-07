@@ -7,10 +7,11 @@ import 'package:property2/Models/constants.dart';
 import 'package:property2/Screens/Templates/hiddendrawer.dart';
 import 'package:property2/Screens/Templates/locationPage.dart';
 import 'package:property2/Screens/Templates/pageAchat.dart';
+import 'package:property2/model/property.dart';
 
 class PlaceDetails extends StatelessWidget {
-  final PlaceModel placeModel;
-  PlaceDetails({required this.placeModel});
+  final Property property;
+  PlaceDetails({required this.property});
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +38,18 @@ class PlaceDetails extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Hero(
-                  tag: placeModel.title,
+                  tag:"${property.titre}" ,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(32),
-                    child: Image(
+                    child: property.images != null ?
+                    Image(
                       fit: BoxFit.cover,
-                      image: AssetImage(placeModel.imagePath),
-                    ),
+                      image: ImageUtils.imageFromBase64String(property.images?[0].piece).image,
+                    )
+                        : Container(
+                  color:  Colors.blueAccent,
+                  height: 220,
+                    width: 120,),
                   ),
                 ),
                 SizedBox(
@@ -56,7 +62,7 @@ class PlaceDetails extends StatelessWidget {
                     Flexible(
                       flex: 3,
                       child: Text(
-                        placeModel.title,
+                     "${property.titre}",
                         style: textTheme.headline4?.apply(
                           color: Colors.black,
                         ),
@@ -70,7 +76,7 @@ class PlaceDetails extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "${placeModel.rent}\ Fcfa ",
+                              "${property.prix}\ Fcfa ",
                               style: textTheme.headline5,
                             ),
                             Text(
@@ -161,20 +167,20 @@ class PlaceDetails extends StatelessWidget {
 
                       onPressed: () {
 
-    if (placeModel.statut == "Louer ce bien"){
+    if (property.statut == "Mettre en vente" ){
 
       Navigator.pushReplacement(
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child: LocationPage()));
+              child: LocationPage(property: property,)));
     }
     else
       Navigator.pushReplacement(
           context,
           PageTransition(
               type: PageTransitionType.fade,
-              child: AchatPage()));
+              child: AchatPage(property: property)));
     },
                       child: Container(
                         decoration: BoxDecoration(
@@ -182,7 +188,7 @@ class PlaceDetails extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)
                         ),
                         child: Text(
-                            placeModel.statut,
+                            "${property.statut}",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 13.0
@@ -287,19 +293,24 @@ class PlaceDetails extends StatelessWidget {
                   height: 250,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: placeModel.photoCollections.length,
+                    itemCount: property.images?.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(18),
-                          child: Image(
+                          child: property.images != null?
+                          Image(
                             height: 220,
                             width: 120,
                             fit: BoxFit.cover,
-                            image:
-                                AssetImage(placeModel.photoCollections[index]),
-                          ),
+                              image:
+                              ImageUtils.imageFromBase64String(property.images?[0].piece).image
+                          )
+                              : Container(
+                        color:  Colors.blueAccent,
+                        height: 220,
+                          width: 120,),
                         ),
                       );
                     },

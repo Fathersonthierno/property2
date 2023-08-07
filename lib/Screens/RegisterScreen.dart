@@ -10,6 +10,7 @@ import 'package:property2/network/api.provider.dart';
 import 'package:property2/network/localstorage.dart';
 import 'package:property2/screens/HomePage.dart';
 import 'package:property2/screens/Login_Page.dart';
+import 'package:test/expect.dart';
 
 class RegisterScreen extends StatefulWidget {
 
@@ -407,8 +408,19 @@ var obscuredText ;
       'typeUtilisateur': dropdownValue
     } ;
    final response = await ApiProvider.register(data);
-   print(response.body);
-   final resp = jsonDecode(response.body);
+    final resp = jsonDecode(response.body);
+   // if (response.statusCode == 200) {
+   //   showDialog(context: context,
+   //       barrierDismissible: true,
+   //       builder: (BuildContext dialogContext) {
+   //         return AlertDialog(title: Text("inscription réussi"),
+   //             content: Text("Réponse du serveur $resp")
+   //         );
+   //       }
+   //
+   //   );
+   // }
+   // print(response.body);
    LocalStorage.saveToken(resp['access_token']);
    LocalStorage.saveRefreshToken(resp['refresh_token']);
   }

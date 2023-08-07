@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:property2/Models/Datamodel/meslocations.dart';
+import 'package:property2/model/operation.dart';
+import 'package:property2/network/api.provider.dart';
 
 class LocationCard extends StatelessWidget {
   LocationCard({super.key , required this.mesLocations});
@@ -77,5 +81,16 @@ class LocationCard extends StatelessWidget {
     ),
     );
   }
+  // void save () async {
+  //
+  //   Operation operation = Operation();
+  //   operation.datedfin;
+  //   operation.datedebut;
+  //
+  //   final response = await ApiProvider.getOperation(jsonDecode(r)));
+  //   print(response);
+  //
+  //
+  // }
 }
 

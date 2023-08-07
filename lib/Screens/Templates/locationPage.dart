@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:property2/Models/Datamodel/meslocations.dart';
 import 'package:property2/model/operation.dart';
+import 'package:property2/model/property.dart';
+import 'package:property2/network/api.provider.dart';
 
 import '../../library/Common.dart';
 
 
 
 class LocationPage extends StatefulWidget {
+ final Property? property ;
+
+  const LocationPage({Key?key, required this.property}): super(key: key);
   @override
   _LocationPageState createState(
       ) => _LocationPageState();
@@ -20,7 +25,7 @@ class _LocationPageState extends State<LocationPage> {
 
   TextEditingController dateDebutController = TextEditingController();
   TextEditingController dateFinController = TextEditingController();
-  TextEditingController dureeLocationController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
 // void sub(){
 //   locationProvider.meslocations.add(MesLocations(dureeDeLocation: dureeLocationController.text, dateDedebut: dateDebutController.text, dateDeFin: dateFinController.text));
@@ -40,41 +45,25 @@ class _LocationPageState extends State<LocationPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             // Formulaire de demande de location
-                  TextFormField(
-                    decoration: InputDecoration(hintText: 'Durée de location souhaitée',
-              enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(80),
-          borderSide:
-          const BorderSide(color: Colors.transparent, width: 0.0),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(80),
-          borderSide:
-          const BorderSide(color: Colors.transparent, width: 0.0),
-        ),
-        filled: true,
-        fillColor: darkGrey,
-        contentPadding:
-        EdgeInsets.symmetric(horizontal: 17, vertical: 12),
-                      icon: Icon(Icons.text_fields)
-                    ),
-                    controller: dureeLocationController
-                    // onTap: () async {
-                    //   DateTime? duration = await showDatePicker(context: context,
-                    //       initialDate: DateTime.now(),
-                    //       firstDate: DateTime(2000),
-                    //       lastDate: DateTime(2101)
-                    //   );
-                    //   if (duration != null){
-                    //
-                    //     setState(() {
-                    //       dureeLocationController.text = DateFormat("yyyy-MM-dd").format(duration);
-                    //
-                    //     });
-                    //   }else
-                    //     print("pas selectionné");
-                    // },
-                  ),SizedBox(height: 16.0,),
+        //
+        //             controller: dureeLocationController
+        //             // onTap: () async {
+        //             //   DateTime? duration = await showDatePicker(context: context,
+        //             //       initialDate: DateTime.now(),
+        //             //       firstDate: DateTime(2000),
+        //             //       lastDate: DateTime(2101)
+        //             //       lastDate: DateTime(2101)
+        //             //   );
+        //             //   if (duration != null){
+        //             //
+        //             //     setState(() {
+        //             //       dureeLocationController.text = DateFormat("yyyy-MM-dd").format(duration);
+        //             //
+        //             //     });
+        //             //   }else
+        //             //     print("pas selectionné");
+        //             // },
+        //           ),SizedBox(height: 16.0,),
                   TextFormField(
                     decoration: InputDecoration(hintText: 'Date de début',
               enabledBorder: OutlineInputBorder(
@@ -99,6 +88,7 @@ class _LocationPageState extends State<LocationPage> {
                       }
                       return null;
                     },
+                    keyboardType: TextInputType.datetime,
                     controller: dateDebutController,
                     onTap: () async {
                       DateTime? duration = await showDatePicker(context: context,
@@ -115,7 +105,7 @@ class _LocationPageState extends State<LocationPage> {
                     },
                   ), SizedBox(height: 16.0,),
                   TextFormField(
-                    decoration: InputDecoration(hintText: 'date de début',
+                    decoration: InputDecoration(hintText: 'date de fin',
               enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(80),
           borderSide:
@@ -138,6 +128,7 @@ class _LocationPageState extends State<LocationPage> {
                       }
                       return null;
                     },
+                    keyboardType: TextInputType.datetime,
                     controller: dateFinController,
                     onTap: () async {
                       DateTime? duration = await showDatePicker(context: context,
@@ -156,10 +147,30 @@ class _LocationPageState extends State<LocationPage> {
                     },
                   ),
                   SizedBox(height: 16.0),
+      TextFormField(
+                    decoration: InputDecoration(hintText: 'Description',
+              enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(80),
+          borderSide:
+          const BorderSide(color: Colors.transparent, width: 0.0),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(80),
+          borderSide:
+          const BorderSide(color: Colors.transparent, width: 0.0),
+        ),
+        filled: true,
+        fillColor: darkGrey,
+        contentPadding:
+        EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      icon: Icon(Icons.text_fields)
+                    ),
+        controller: descriptionController ,
+      ),SizedBox(height: 30.0,),
             ElevatedButton(
 
               onPressed: () {
-
+save();
                   // Afficher la boîte de dialogue de confirmation
                   _showConfirmationDialog();
                 },
@@ -203,6 +214,16 @@ style: ElevatedButton.styleFrom(
     );
   }
 
+void save () async {
+    Operation operation = Operation();
+    operation.datedebut= DateTime.tryParse(dateDebutController.text);
+    operation.datedfin= DateTime.tryParse(dateFinController.text);
+
+    final response = await ApiProvider.addOperation(operation.toJson());
+    print(response);
+
+
+}
 
 }
 

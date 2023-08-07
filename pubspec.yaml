@@ -56,7 +56,7 @@ dependencies:
   getwidget: ^2.0.4
   test:
   intl: ^0.18.1
-
+  file_picker: ^5.3.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

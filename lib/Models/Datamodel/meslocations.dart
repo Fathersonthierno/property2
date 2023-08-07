@@ -12,3 +12,18 @@ class LocationProvider {
   ];
 
 }
+
+class Attachment {
+  String piece;
+  DateTime date;
+  String pieceContentType;
+  String type;
+  String name;
+
+  // Constructeur
+  Attachment(this.piece,
+   this.date, this.pieceContentType,
+   this.type,
+   this.name,
+  );
+}

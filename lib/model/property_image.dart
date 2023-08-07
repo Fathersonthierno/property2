@@ -1,3 +1,5 @@
+import 'package:property2/model/property.dart';
+
 class PropertyImage {
   int? id;
   dynamic piece;
@@ -5,6 +7,7 @@ class PropertyImage {
   String? pieceContentType;
   String? description;
   DateTime? date;
+  // Property? property;
 
   PropertyImage({
     this.id,
@@ -13,6 +16,7 @@ class PropertyImage {
     this.pieceContentType,
     this.description,
     this.date,
+    // this.property,
   });
 
   factory PropertyImage.fromJson(Map<String, dynamic> json) => PropertyImage(
@@ -22,6 +26,7 @@ class PropertyImage {
     pieceContentType: json["pieceContentType"],
     description: json["description"],
     date: json["date"] == null ? null : DateTime.parse(json["date"]),
+    // property: json["property"] == null ? null : Property.fromJson(json["property"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -31,5 +36,6 @@ class PropertyImage {
     "pieceContentType": pieceContentType,
     "description": description,
     "date": date?.toIso8601String(),
+    // "property": property?.toJson(),
   };
 }
