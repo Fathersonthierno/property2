@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:io';
@@ -22,8 +21,9 @@ class AnnonceMaisonPage extends StatefulWidget {
 }
 
 class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
-  bool garage = false ;
-  bool cour = false ;
+  bool garage = false;
+
+  bool cour = false;
 
   // late List<File> images;
   //
@@ -50,20 +50,21 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
   TextEditingController typeDocumentController = TextEditingController();
   TextEditingController titreController = TextEditingController();
   TextEditingController prixController = TextEditingController();
-  TextEditingController miseEnVenteOuLocationController = TextEditingController();
+  TextEditingController miseEnVenteOuLocationController =
+      TextEditingController();
 
-   List<File> images = [];
+  List<File> images = [];
 
-   // if (images != null) {
-   //   for (int i = 0; i < images.length; i++) {
-   //     Uint8List imgbytes = await images[i].readAsBytes();
-   //     String bs4str = base64.encode(imgbytes);
-   //     Attachment identityDocAttachment = new Attachment();
-   //     imageAttachment.piece = bs4str;
-   //     imageAttachment.date = DateTime.now();
-   //     imageAttachment.pieceContentType = image.extension;
-   //     imageAttachment.type = 'identity_doc';
-   //     imageAttachment.name = 'image 1';
+  // if (images != null) {
+  //   for (int i = 0; i < images.length; i++) {
+  //     Uint8List imgbytes = await images[i].readAsBytes();
+  //     String bs4str = base64.encode(imgbytes);
+  //     Attachment identityDocAttachment = new Attachment();
+  //     imageAttachment.piece = bs4str;
+  //     imageAttachment.date = DateTime.now();
+  //     imageAttachment.pieceContentType = image.extension;
+  //     imageAttachment.type = 'identity_doc';
+  //     imageAttachment.name = 'image 1';
   // TextEditingController imagesController = TextEditingController();
   // TextEditingController ownerIdController = TextEditingController();
 
@@ -75,11 +76,7 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
         title: Center(
           child: Text(
             "Maison",
-                style: TextStyle(
-              fontSize: 25,
-                  color: Colors.black54
-
-          ),
+            style: TextStyle(fontSize: 25, color: Colors.black54),
           ),
         ),
       ),
@@ -112,38 +109,42 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ), TextFormField(
+              ),
+              TextFormField(
                 controller: adresseController,
                 decoration: InputDecoration(
                   hintText: "Titre",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ),SizedBox(height: 10.0,),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               TextFormField(
                 controller: descriptionController,
                 decoration: InputDecoration(
@@ -151,19 +152,22 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ),SizedBox(height: 10.0,),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               // TextFormField(
               //   controller: typeMaisonController,
               //   decoration: InputDecoration(
@@ -184,26 +188,27 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
               //     EdgeInsets.symmetric(horizontal: 17, vertical: 12),
               //   ),
               // ),
-        TextFormField(
+              TextFormField(
                 controller: miseEnVenteOuLocationController,
                 decoration: InputDecoration(
                   hintText: "Mettre en vente ou en location",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ),TextFormField(
+              ),
+              TextFormField(
                 controller: prixController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -211,19 +216,22 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ),SizedBox(height: 10.0,),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               TextFormField(
                 controller: typeDocumentController,
                 decoration: InputDecoration(
@@ -231,19 +239,20 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ),SizedBox(height: 10.0),
+              ),
+              SizedBox(height: 10.0),
               TextFormField(
                 controller: dimensionController,
                 decoration: InputDecoration(
@@ -251,31 +260,36 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ),SizedBox(height: 10.0,),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               ListTile(
                 title: Text("Garage"),
                 trailing: Switch(
-                  onChanged: (bool value) {
-                    setState(() {
-                      garage=value;
-                    });
-                  },
-                  value: garage,
-                    activeColor: Colors.deepPurple.shade300
-                ),
-              ),SizedBox(height: 10.0,),
+                    onChanged: (bool value) {
+                      setState(() {
+                        garage = value;
+                      });
+                    },
+                    value: garage,
+                    activeColor: Colors.deepPurple.shade300),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               TextFormField(
                 controller: capaciteGarageController,
                 keyboardType: TextInputType.number,
@@ -284,33 +298,33 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(80),
                     borderSide:
-                    const BorderSide(color: Colors.transparent, width: 0.0),
+                        const BorderSide(color: Colors.transparent, width: 0.0),
                   ),
                   filled: true,
                   fillColor: darkGrey,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 17, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 17, vertical: 12),
                 ),
-              ),SizedBox(height: 10.0,),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
               ListTile(
                 title: Text("Cour"),
                 trailing: Switch(
-                  onChanged: (bool value) {
-                    setState(() {
-                      cour = value;
-
-                    });
-                  },
-                  value: cour,
-                    activeColor: Colors.deepPurple.shade300
-                ),
+                    onChanged: (bool value) {
+                      setState(() {
+                        cour = value;
+                      });
+                    },
+                    value: cour,
+                    activeColor: Colors.deepPurple.shade300),
               ),
-
 
               // TextField(
               //   controller: imagesController,
@@ -325,10 +339,11 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                 padding: EdgeInsets.all(16.0),
                 child: Center(
                   child: ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       chooseImages();
                     },
-                    child: Icon(Icons.camera_alt,
+                    child: Icon(
+                      Icons.camera_alt,
                       color: Colors.deepPurple.shade300,
                       size: 60,
                     ),
@@ -338,38 +353,36 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                 //   'assets/introduction_animation/camera.png',
                 //       color: Colors.deepPurple.shade300
                 // ),
-
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.brown[100],
+                  backgroundColor: Colors.brown[100],
                   fixedSize: Size(250, 30.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(35.0)),
                 ),
                 onPressed: () {
                   save();
-
                 },
-                  //     // Créer un nouvel objet Property à partir des données du formulaire
-                  //     Property newProperty = Property(
-                  //       adresse: adresseController.text,
-                  //       description: descriptionController.text,
-                  //       type: typeController.text,
-                  //       images: imagesController.text.split(','),
-                  //       owner: PropertyOwner(id: int.parse(ownerIdController.text)),
-                  //     );
+                //     // Créer un nouvel objet Property à partir des données du formulaire
+                //     Property newProperty = Property(
+                //       adresse: adresseController.text,
+                //       description: descriptionController.text,
+                //       type: typeController.text,
+                //       images: imagesController.text.split(','),
+                //       owner: PropertyOwner(id: int.parse(ownerIdController.text)),
+                //     );
 
-                  // Faire quelque chose avec le nouvel objet Property, comme l'envoyer à une API ou le sauvegarder localement
+                // Faire quelque chose avec le nouvel objet Property, comme l'envoyer à une API ou le sauvegarder localement
 
-                  // Réinitialiser les champs du formulaire
-                  // adresseController.clear();
-                  // descriptionController.clear();
-                  // typeController.clear();
-                  // // imagesController.clear();
-                  // ownerIdController.clear();
+                // Réinitialiser les champs du formulaire
+                // adresseController.clear();
+                // descriptionController.clear();
+                // typeController.clear();
+                // // imagesController.clear();
+                // ownerIdController.clear();
 
-                  // Afficher une boîte de dialogue ou une notification pour confirmer l'ajout du bien immobilier
+                // Afficher une boîte de dialogue ou une notification pour confirmer l'ajout du bien immobilier
                 //   showDialog(
                 //     context: context,
                 //     builder: (BuildContext context) {
@@ -395,34 +408,33 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
                 //     },
                 //   );
                 // },
-                child: Text('Ajouter', style: TextStyle(
-                    color: Colors.black54,
-                  fontSize: 20.0
-
-                ),),
+                child: Text(
+                  'Ajouter',
+                  style: TextStyle(color: Colors.black54, fontSize: 20.0),
+                ),
               ),
             ],
           ),
         ),
       ),
     );
-
   }
-  void save () async {
+
+  void save() async {
     Property property = Property();
-    property.adresse= adresseController.text;
-    property.description= descriptionController.text;
+    property.adresse = adresseController.text;
+    property.description = descriptionController.text;
     property.titre = titreController.text;
     property.prix = int.parse(prixController.text);
-    property.statut= miseEnVenteOuLocationController.text;
+    property.statut = miseEnVenteOuLocationController.text;
     // property.type= typeMaisonController.text;
-    
+
     Maison maison = Maison();
-    maison.cour=cour;
-    maison.garage=garage;
-    maison.capaciteGarage= int.parse(capaciteGarageController.text);
-    maison.typeDocment= typeDocumentController.text;
-    maison.dimension= dimensionController.text;
+    maison.cour = cour;
+    maison.garage = garage;
+    maison.capaciteGarage = int.parse(capaciteGarageController.text);
+    maison.typeDocment = typeDocumentController.text;
+    maison.dimension = dimensionController.text;
 
     if (images != null) {
       List<PropertyImage> propertyImages = [];
@@ -434,36 +446,34 @@ class _AnnonceMaisonPageState extends State<AnnonceMaisonPage> {
         img.piece = bs4str;
         img.date = DateTime.now();
         img.pieceContentType = image.extension;
-        img.name = 'image '+ i.toString();
+        img.name = 'image ' + i.toString();
         propertyImages.add(img);
       }
       property.images = propertyImages;
     }
-    property.maison = maison ;
+    property.maison = maison;
     print(property.toJson());
     // maison.property= property;
     final response = await ApiProvider.addPropertyToOwner(property.toJson());
-    print(response);
-
+    print(response.statusCode);
   }
+
   chooseImages() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles(
-  type: FileType.custom,
-  allowedExtensions: ['doc', 'docx', 'jpg', 'png', 'pdf'],
-  allowMultiple: true,
-  );
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['doc', 'docx', 'jpg', 'png', 'pdf'],
+      allowMultiple: true,
+    );
 
-  if (result != null) {
-  result.files.forEach((element) {
-  setState(() {
-  images.add(File(element.path!));
-  });
-  });
+    if (result != null) {
+      result.files.forEach((element) {
+        setState(() {
+          images.add(File(element.path!));
+        });
+      });
+    }
   }
-  }
-
 }
-
 
 // Future _pickImage() async {
 //   final picker = ImagePicker();

@@ -106,12 +106,7 @@ class LoginPage extends StatelessWidget {
                       borderRadius: new BorderRadius.circular(35.0)),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.fade,
-                          child: HiddenDrawer()));
-                  save();
+                  save(context);
                 },
 
                 child: RichText(
@@ -167,24 +162,31 @@ class LoginPage extends StatelessWidget {
         ));
   }
 
-  void save() async {
+  void save(BuildContext context) async {
     Map<String, dynamic> data = {
       'email': emailController?.text,
       'password': passwordController?.text,
     };
     final response = await ApiProvider.authenticate(data);
+    print("----- FROM LOGIN PAGE ------");
+    print(response.body);
     final res = jsonDecode(response.body);
-    LocalStorage.saveToken(res['access_token']);
-    LocalStorage.saveRefreshToken(res['refresh_token']);
-    // if (response.statusCode == 200) {
-    //    showDialog(context: context,
-    //       barrierDismissible: true,
-    //       builder: (BuildContext dialogContext) {
-    //         return AlertDialog(title: Text("inscription réussi"), content: Text(
-    //             "réponse du server $res"
-    //         ));
-    //       }
-    //   );
-    // }
+    await LocalStorage.saveToken(res['access_token']);
+    await LocalStorage.saveRefreshToken(res['refresh_token']);
+    if (response.statusCode == 200) {
+       /*showDialog(context: context,
+          barrierDismissible: true,
+          builder: (BuildContext dialogContext) {
+            return AlertDialog(title: Text("inscription réussi"), content: Text(
+                "réponse du server $res"
+            ));
+          }
+      );*/
+      Navigator.pushReplacement(
+          context,
+          PageTransition(
+              type: PageTransitionType.fade,
+              child: HiddenDrawer()));
+    }
   }
 }

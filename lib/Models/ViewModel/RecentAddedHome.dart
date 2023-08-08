@@ -62,7 +62,7 @@ class _RecentAddedState extends State<RecentAdded> {
                       tag: "${widget.property.titre}" ,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(24),
-                        child:  widget.property.images != null ?
+                        child:  (widget.property.images != null) ?
                         Image(
                           fit: BoxFit.cover,
                           image: ImageUtils.imageFromBase64String(widget.property.images?[0].piece).image,
